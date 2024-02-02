@@ -1,4 +1,4 @@
-﻿namespace _01_first_project.Models;
+﻿namespace _01_first_project.Models.Entities;
 
 public class Category(int id, string name)
 {

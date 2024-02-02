@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace _01_first_project.Models;
+namespace _01_first_project.Models.Entities;
 
-[Table("product")]
+//[Table("product")]
 public class Product
 {
     [Key]
@@ -24,7 +24,8 @@ public class Product
     [Required]
     public Category Category { get; set; }
 
-    // One to Many relationship
+    // One to Many relationship if exists in another
+    [Required]
     public List<Tag> Tags { get; set; }
 
     public override bool Equals(object? obj)

@@ -1,4 +1,4 @@
-using _01_first_project.Models;
+using _01_first_project.Models.Entities;
 
 namespace _01_first_project.Repositories;
 

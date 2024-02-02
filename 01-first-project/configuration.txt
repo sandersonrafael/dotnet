@@ -1,22 +1,30 @@
-﻿The project's configuration is in the appsettings.json file
-To use that configuration in the project, the user can use the interface IConfiguration
+﻿## Configurations
 
-It is also possible for the user to create a custom appsettings.json for, for example, development, such as:
--> appsettings.Development.json
-or
--> appsettings.Staging.json
 
-The compiler take the appsettings.Development as a priority
+# appsettings.json
 
-In the terminal will be showed the Hosting environment when application starts
+-> The project's configuration is in the appsettings.json file
+-> To use that configuration in the project, the user can use the interface IConfiguration
+-> It is also possible for the user to create a custom appsettings.json for, for example, development, such as:
+    --> appsettings.Development.json
+        or
+    --> appsettings.Staging.json
 
-To change the environment, the user can change in file launchSettings.json in folder Properties
+-> The compiler take the appsettings.Development as a priority
+-> In the terminal will be showed the Hosting environment when application starts
+-> To change the environment, the user can change in file launchSettings.json in folder Properties
+    --> Just rename the value of "environmentVariables": { "ASPNETCORE_ENVIRONMENT": "Development" } to required environment
+    --> Now, the application will use the values from Development settings. If the setting don't exists in Development, will be found
+        from appsettings.json (if exists there)
 
-Just rename the value of "environmentVariables": { "ASPNETCORE_ENVIRONMENT": "Development" } to required environment
+-> In application, it's possible to use the environment type to place a condition, like: if (app.Environment.IsStaging()) ...
+-> The different profiles can be initialized from command line with her name. Ex: dotnet run (profileName) -> dotnet run IISExpress
 
-Now, the application will use the values from Development settings. If the setting don't exists in Development, will be found
-    from appsettings.json (if exists there)
 
-In application, it's possible to use the environment type to place a condition, like: if (app.Environment.IsStaging()) ...
+# Connection Strings
 
-The different profiles can be initialized from command line with her name. Ex: dotnet run (profileName) -> dotnet run IISExpress
+-> Add the Connection String in appsettings.json file
+-> After, the class that extends DbContext need to receive a constructor to inject the configurations from appsettings.json
+
+-> use builder.Services.AddSqlServer<AppDbContext>(builder.Configuration["ConnectionStrings:Default"]) in Program.cs file to 
+    --> auto obtain the connection string from file and inject to AppDbContext

@@ -5,7 +5,7 @@
 namespace _01_first_project.Migrations
 {
     /// <inheritdoc />
-    public partial class CategoryRequired : Migration
+    public partial class RelationshipUpdate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

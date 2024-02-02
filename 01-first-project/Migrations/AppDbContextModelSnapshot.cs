@@ -21,22 +21,7 @@ namespace _01_first_project.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ProductTag", b =>
-                {
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductsId", "TagsId");
-
-                    b.HasIndex("TagsId");
-
-                    b.ToTable("ProductTag");
-                });
-
-            modelBuilder.Entity("_01_first_project.Models.Category", b =>
+            modelBuilder.Entity("_01_first_project.Models.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,10 +35,10 @@ namespace _01_first_project.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("_01_first_project.Models.Product", b =>
+            modelBuilder.Entity("_01_first_project.Models.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -82,10 +67,10 @@ namespace _01_first_project.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("product");
+                    b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("_01_first_project.Models.Tag", b =>
+            modelBuilder.Entity("_01_first_project.Models.Entities.Tag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -97,35 +82,41 @@ namespace _01_first_project.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Tag");
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("ProductTag", b =>
+            modelBuilder.Entity("_01_first_project.Models.Entities.Product", b =>
                 {
-                    b.HasOne("_01_first_project.Models.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("_01_first_project.Models.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("TagsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("_01_first_project.Models.Product", b =>
-                {
-                    b.HasOne("_01_first_project.Models.Category", "Category")
+                    b.HasOne("_01_first_project.Models.Entities.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("_01_first_project.Models.Entities.Tag", b =>
+                {
+                    b.HasOne("_01_first_project.Models.Entities.Product", "Product")
+                        .WithMany("Tags")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("_01_first_project.Models.Entities.Product", b =>
+                {
+                    b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
         }
