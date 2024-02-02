@@ -1,0 +1,10 @@
+﻿To associate the DbSet to Database, it is necessary to create the tables. Let's add migrations for this
+
+To add migrations, we'll use the command: dotnet ef migrations add MigrationName
+
+At last, to update the database with migrations, use the command: dotnet ef database update (it will update database until the last migration)
+
+To cancel a migration before sendo the update command to DB, we can use the command:
+	dotnet ef migrations remove (it will remove the last migration added)
+
+To return to a selected migration (not the last), it is necessary to use the command: dotnet ef database update MigrationName

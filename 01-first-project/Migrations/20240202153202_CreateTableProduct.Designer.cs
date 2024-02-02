@@ -11,7 +11,7 @@ using _01_first_project.Context;
 namespace _01_first_project.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240202033756_CreateTableProduct")]
+    [Migration("20240202153202_CreateTableProduct")]
     partial class CreateTableProduct
     {
         /// <inheritdoc />
@@ -26,7 +26,15 @@ namespace _01_first_project.Migrations
 
             modelBuilder.Entity("_01_first_project.Models.Product", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<string>("Code")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(255)")
                         .HasColumnName("code");
 
@@ -35,7 +43,7 @@ namespace _01_first_project.Migrations
                         .HasColumnType("VARCHAR(255)")
                         .HasColumnName("name");
 
-                    b.HasKey("Code");
+                    b.HasKey("Id");
 
                     b.ToTable("product");
                 });
