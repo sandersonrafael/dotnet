@@ -1,0 +1,5 @@
+To connect to SQL Server with user and password, it is necessary to use the general administrator user (sa) and password
+In this application, will be used:
+
+user: sa
+password: senha123

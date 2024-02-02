@@ -1,9 +1,15 @@
+using _01_first_project.Context;
 using _01_first_project.Models;
 using _01_first_project.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add auto injection for AppDbContext class
+builder.Services.AddDbContext<AppDbContext>();
+
 var app = builder.Build();
+
 
 var configuration = app.Configuration; // Obtain configuration from appsettings.json
 

@@ -1,0 +1,7 @@
+﻿In this project, we'll work with SQLServer.
+
+The packages to install are:
+
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Design
+Microsoft.EntityFrameworkCore.SqlServer
