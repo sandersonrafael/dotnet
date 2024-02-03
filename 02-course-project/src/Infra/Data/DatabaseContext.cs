@@ -1,17 +1,24 @@
-﻿using FinalProject.Domain;
-using FinalProject.Domain.Products;
+﻿using FinalProject.Domain.Products;
 using Flunt.Notifications;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Infra.Data;
 
-public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbContext(options)
-{
+public class DatabaseContext : IdentityDbContext<IdentityUser> // To use Identity package, change DbContext to IdentityDbContext<IdentityUser>
+{ // Add service no Program.cs builder's // Add changes to OnModelCreating method down
     public DbSet<Product> Products { get; set; }
     public DbSet<Category> Categories { get; set; }
 
+    public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
+
     protected override void OnModelCreating(ModelBuilder model)
     {
+        // Calling father class method OnModelCreating and attrib his properties on
+            // that children class characteristics inside OnModelCreating
+        base.OnModelCreating(model);
+
         // Ignoring attribute Notification inside the entities
         model.Ignore<Notification>();
 
