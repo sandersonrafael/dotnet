@@ -6,7 +6,9 @@ namespace FinalProject.Endpoints.Categories;
 
 public class CategoryUpdate
 {
-    public static string Template => "/categories/{id}";
+    // To validate route params, can be used :type notation. Ex:
+    // Using this, the API automatically will send 404 respnose if user's input is invalid
+    public static string Template => "/categories/{id:guid}";
     public static string[] Methods => new string[] { HttpMethod.Put.ToString() };
     public static Delegate Handle => Action;
 
@@ -14,9 +16,10 @@ public class CategoryUpdate
     {
         Category? category = context.Categories.FirstOrDefault(c => c.Id == id);
         if (category == null) return Results.NotFound();
-        
-        category.Name = request.Name;
-        category.Active = request.Active;
+
+        category.EditInfo(request.Name, request.Active);
+
+        if (!category.IsValid) return Results.ValidationProblem(category.Notifications.ConvertToProblemDetails());
 
         context.SaveChanges();
 

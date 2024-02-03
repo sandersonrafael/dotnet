@@ -1,4 +1,6 @@
-﻿using FinalProject.Domain.Products;
+﻿using FinalProject.Domain;
+using FinalProject.Domain.Products;
+using Flunt.Notifications;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Infra.Data;
@@ -10,6 +12,9 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
 
     protected override void OnModelCreating(ModelBuilder model)
     {
+        // Ignoring attribute Notification inside the entities
+        model.Ignore<Notification>();
+
         model.Entity<Product>()
             .Property(p => p.Name).IsRequired();
         model.Entity<Product>()
