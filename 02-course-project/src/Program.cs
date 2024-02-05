@@ -33,5 +33,6 @@ app.MapMethods(CategoryPost.Template, CategoryPost.Methods, CategoryPost.Handle)
 app.MapMethods(CategoryUpdate.Template, CategoryUpdate.Methods, CategoryUpdate.Handle);
 
 app.MapMethods(EmployeePost.Template, EmployeePost.Methods, EmployeePost.Handle);
+app.MapMethods(EmployeeFindAll.Template, EmployeeFindAll.Methods, EmployeeFindAll.Handle);
 
 app.Run();
