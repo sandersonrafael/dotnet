@@ -1,5 +1,6 @@
 ﻿using FinalProject.Domain.Products;
 using FinalProject.Infra.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FinalProject.Endpoints.Categories;
 
@@ -9,6 +10,8 @@ public class CategoryPost
     public static string[] Methods => new string[] { HttpMethod.Post.ToString() };
     public static Delegate Handle => Action;
 
+    //[AllowAnonymous] // All users can access this route and get their resources without authentication / authorization
+    [Authorize] // Only authenticated / authorized users can access this endpoint
     public static IResult Action(CategoryRequest request, DatabaseContext context)
     {
         Category category = new(request.Name/*, string.Empty*/, "Test", "Test");

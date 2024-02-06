@@ -2,4 +2,4 @@ To connect to SQL Server with user and password, it is necessary to use the gene
 In this application, will be used:
 
 user: sa
-password: senha123
+password: Senha@123
