@@ -9,6 +9,6 @@ public interface IAuthorService
     Task<ResponseModel<AuthorModel>> FindById(int id);
     Task<ResponseModel<AuthorModel>> FindByBookId(int bookId);
     Task<ResponseModel<AuthorModel>> Create(AuthorDto dto);
-    Task<ResponseModel<AuthorModel>> Update(AuthorDto dto);
+    Task<ResponseModel<AuthorModel>> Update(int id, AuthorDto dto);
     Task<ResponseModel<AuthorModel>> DeleteById(int id);
 }

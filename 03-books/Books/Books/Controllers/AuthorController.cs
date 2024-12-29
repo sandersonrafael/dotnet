@@ -43,6 +43,13 @@ public class AuthorController : ControllerBase
         return Created($"FindAuthor/{author.Data?.Id}", author);
     }
 
+    [HttpPut("UpdateAuthor/{id}")]
+    public async Task<ActionResult<ResponseModel<List<AuthorModel>>>> Update(int id, AuthorDto dto)
+    {
+        ResponseModel<AuthorModel> author = await _service.Update(id, dto);
+        return Ok(author);
+    }
+
     [HttpDelete("DeleteAuthorById/{id}")]
     public async Task<ActionResult<ResponseModel<List<AuthorModel>>>> DeleteById(int id)
     {

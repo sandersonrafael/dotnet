@@ -102,9 +102,38 @@ public class AuthorService : IAuthorService
         }
     }
 
-    public Task<ResponseModel<AuthorModel>> Update(AuthorDto dto)
+    public async Task<ResponseModel<AuthorModel>> Update(int id, AuthorDto dto)
     {
-        throw new NotImplementedException();
+        ResponseModel<AuthorModel> response = new();
+
+        try
+        {
+            AuthorModel? authorToUpdate = await _context.Authors.FirstOrDefaultAsync(author => author.Id == id);
+
+            if (authorToUpdate == null)
+            {
+                response.Success = false;
+                response.Message = $"No author found for id {id}";
+            }
+            else
+            {
+                if (dto.FirstName != null) authorToUpdate.FirstName = dto.FirstName;
+                if (dto.LastName != null) authorToUpdate.LastName = dto.LastName;
+                await _context.SaveChangesAsync();
+
+                response.Message = $"Author {id} successfully updated";
+            }
+
+            response.Data = authorToUpdate;
+
+            return response;
+        }
+        catch (Exception ex)
+        {
+            response.Success = false;
+            response.Message = ex.Message;
+            return response;
+        }
     }
 
     public async Task<ResponseModel<AuthorModel>> DeleteById(int id)
